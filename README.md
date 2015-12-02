@@ -25,7 +25,7 @@ Refer to [Dockerfile MongoDB](https://github.com/dockerfile/mongodb) for usage n
 
     docker run -itd -p 27017:27017 -p 27018:27018 -p 27019:27019 --name mongodb soleo/mongodb-replicaset
 
-### Create container with data volume link with current path
+#### Create container link with data volume link with current path
 
     docker run -itd -p 27017:27017 -p 27018:27018 -p 27019:27019 --name mongodb -v "$(pwd)":/data soleo/mongodb-replicaset
 
