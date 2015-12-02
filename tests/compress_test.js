@@ -6,7 +6,7 @@
 // We are shooting for ~16 GiB of data, without indexes, so do 1,024 iterations (512 from each client)
 // This will mean being a little short (~500MiB) in terms of target data size, but keeps things simple
  
-for(var j = 0; j < 512; j++){ //
+for(var j = 0; j < 10; j++){ //
   bigDoc = [];
   for(var i = 0; i < 80000; i++){
   // we get an ObjectID in _id for "free", and it's a common default, so let's leave it as-is

@@ -36,3 +36,9 @@ Once the container is running you can initialize the ReplicaSet with the followi
 * Access shell of container with `docker exec -it mongodb bash`
 * Access mongo shell with `mongo`
 
+### If you use docker-machine and virtualbox
+
+```
+docker-machine create --driver virtualbox --virtualbox-disk-size "50000" --virtualbox-memory "2048" mongo
+```
+
