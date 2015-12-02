@@ -21,10 +21,9 @@ EXPOSE 27018
 EXPOSE 27019
 
 # Copy Configurations
-COPY etc/init/*.conf /etc/init/
 COPY etc/*.conf /etc/
 COPY rsConfig.js /rsConfig.js
 COPY start.sh /start.sh
 
 # Define default command.
-CMD ["mongod"]
+CMD ["sh","/start.sh"]

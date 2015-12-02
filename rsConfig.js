@@ -14,6 +14,6 @@ rsconf = {
                        host: "localhost:27019"
                       }
                     ]
-         }
+         };
 rs.initiate( rsconf );
 rs.conf();
