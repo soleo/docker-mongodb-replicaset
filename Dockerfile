@@ -1,6 +1,8 @@
 # Pull base image.
 FROM ubuntu:14.04
 
+MAINTAINER Xinjiang Shao <shaoxinjiang at gmail dot com>
+
 # Install MongoDB.
 RUN \
   apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10 && \
@@ -22,7 +24,6 @@ EXPOSE 27019
 
 # Copy Configurations
 COPY etc/*.conf /etc/
-COPY rsConfig.js /rsConfig.js
 COPY start.sh /start.sh
 
 # Define default command.
