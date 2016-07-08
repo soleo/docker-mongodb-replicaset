@@ -1,0 +1,46 @@
+version: "2"
+services:
+  mongo3:
+    hostname: mongo3
+    image: mongo:2.6
+    entrypoint: [ "mongod", "--replSet", "rs0", "--journal", "--smallfiles", "--rest" ]
+    ports:
+      - "27018:27017"
+      - "28018:28017"
+    restart: always
+    volumes:
+      - ./data/rs0-3:/data
+  mongo2:
+    hostname: mongo2
+    image: mongo:2.6
+    entrypoint: [ "mongod", "--replSet", "rs0", "--journal", "--smallfiles", "--rest" ]
+    ports: 
+      - "27019:27017"
+      - "28019:28017"
+    restart: always
+    volumes:
+      - ./data/rs0-2:/data
+  mongo1:
+    hostname: mongo1
+    image: mongo:2.6
+    entrypoint: [ "mongod", "--replSet", "rs0", "--journal", "--smallfiles", "--rest" ]
+    ports:
+      - "27017:27017"
+      - "28017:28017"
+    links:
+      - "mongo2:mongo2"
+      - "mongo3:mongo3"
+    restart: always
+    volumes:
+      - ./data/rs0-1:/data
+  # This configures the MongoDB replicaset
+  mongosetup:
+    image: mongo:2.6
+    links:
+      - "mongo1:mongo1"
+      - "mongo2:mongo2"
+      - "mongo3:mongo3"
+    volumes:
+      - ./scripts:/scripts
+    entrypoint: [ "/scripts/setup.sh" ]
+

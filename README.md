@@ -1,8 +1,5 @@
 MongoDB ReplicaSet Dockerfile for Dev
 =============================
-Inspired By [inlight-media](https://github.com/inlight-media/docker-mongodb-replica-set)
-
-A Dockerfile and config for launching a MongoDB contatiner with 3 mongo processes that act as a ReplicaSet. There are config files for each mongo instance that are copied to the container. The shell script handles creation of the data directories and starting mongo.
 
 ### Notes
 
@@ -10,35 +7,31 @@ It's probably not a good idea to run this setup in production as each mongo inst
 
 ### Base Docker Image
 
-* [ubuntu:14.04](https://hub.docker.com/_/ubuntu/)
+* [mongo:2.6](https://hub.docker.com/_/mongo/)
 
 ### Installation
 
-1. Install [Docker](https://www.docker.com/).
-2. `docker build -t="soleo/mongodb-replicaset" github.com/soleo/docker-mongo-replicaset`
+* Install [Docker Beta - Native for Mac OS](https://www.docker.com/).
 
 ### Usage
 
-Refer to [Dockerfile MongoDB](https://github.com/dockerfile/mongodb) for usage notes not specific to ReplicaSet
+```console
+$ docker-compose up -d
+```
 
-#### Create container from image and open ports for ReplicaSet
+#### Access Shell of Container
 
-    docker run -itd -p 27017:27017 -p 27018:27018 -p 27019:27019 --name mongodb soleo/mongodb-replicaset
+* Check Status of mongo containers 
 
-#### Create container link with data volume link with current path
+```console
+$ docker ps
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                                                NAMES
+0ee78c0e5376        mongo:2.6           "mongod --replSet rs0"   6 minutes ago       Up 6 minutes        0.0.0.0:27017->27017/tcp, 0.0.0.0:28017->28017/tcp   dockermongodbreplicaset_mongo1_1
+36c9a70a8f22        mongo:2.6           "mongod --replSet rs0"   6 minutes ago       Up 6 minutes        0.0.0.0:27018->27017/tcp, 0.0.0.0:28018->28017/tcp   dockermongodbreplicaset_mongo3_1
+508fa0885710        mongo:2.6           "mongod --replSet rs0"   6 minutes ago       Up 6 minutes        0.0.0.0:27019->27017/tcp, 0.0.0.0:28019->28017/tcp   dockermongodbreplicaset_mongo2_1
+```
 
-    docker run -itd -p 27017:27017 -p 27018:27018 -p 27019:27019 --name mongodb -v "$(pwd)":/data soleo/mongodb-replicaset
-
-#### Initiate ReplicaSet
-
-Once the container is running you can initialize the ReplicaSet with the following steps:
-
-* Access shell of container with `docker exec -it mongodb bash`
+* Access shell of container with `docker exec -it dockermongodbreplicaset_mongo1_1 bash`
 * Access mongo shell with `mongo`
 
-### If you use docker-machine and virtualbox
-
-```
-docker-machine create --driver virtualbox --virtualbox-disk-size "50000" --virtualbox-memory "2048" mongo
-```
 
