@@ -1,4 +1,5 @@
 test:
+    hostname: test
     image: mongo:2.6
     volumes:
         - .:/docker-mongodb-replicaset
