@@ -1,0 +1,11 @@
+test:
+    image: mongo:2.6
+    volumes:
+        - .:/docker-mongodb-replicaset
+        - $CIRCLE_TEST_REPORTS:/circle_artifacts
+    working_dir: /docker-mongodb-replicaset
+    links:
+        - "mongo1:mongo1"
+        - "mongo2:mongo2"
+        - "mongo3:mongo3"
+    command: nosetests -v --with-xunit --xunit-file=/circle_artifacts/nosetests.xml --with-coverage --cover-html --cover-html-dir=/circle_artifacts/coverage_html/
