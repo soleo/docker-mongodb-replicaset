@@ -11,4 +11,4 @@ services:
         - "mongo1:mongo1"
         - "mongo2:mongo2"
         - "mongo3:mongo3"
-    command: sh scripts/ci_test.sh
+    command: sh tests/ci_test.sh
