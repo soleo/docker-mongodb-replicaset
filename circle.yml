@@ -16,10 +16,10 @@ dependencies:
 test:
   pre:
     # starting the backend services I want for my test container using docker run, which will not bind published ports by default
-     - docker-compose -f docker-compose.yml -f docker-compose-test.yml  run -d mongo3
-     - docker-compose -f docker-compose.yml -f docker-compose-test.yml  run -d mongo2
-     - docker-compose -f docker-compose.yml -f docker-compose-test.yml  run -d mongo1
-     - docker-compose -f docker-compose.yml -f docker-compose-test.yml  run -d mongosetup
+     - docker-compose -f docker-compose.yml -f docker-compose-test.yml run -d mongo3
+     - docker-compose -f docker-compose.yml -f docker-compose-test.yml run -d mongo2
+     - docker-compose -f docker-compose.yml -f docker-compose-test.yml run -d mongo1
+     - docker-compose -f docker-compose.yml -f docker-compose-test.yml run -d mongosetup
   override:
      # docker-compose run was restarting all linked services with their published ports and causing port bind collisions
      # so specifying --no-deps so they don't restart
@@ -30,8 +30,8 @@ test:
      - docker stop $(docker ps -a -q)
      # get each log separately - docker-compose logs times out, I think it's trying to stream even though the containers are stopped.
      # depends on the standard naming convention of docker-compose
-     - docker logs dockermongodbreplicaset_mongo1_1 > $CIRCLE_TEST_REPORTS/mongo1.log
-     - docker logs dockermongodbreplicaset_mongo2_1 > $CIRCLE_TEST_REPORTS/mongo2.log
-     - docker logs dockermongodbreplicaset_mongo3_1 > $CIRCLE_TEST_REPORTS/mongo3.log
-     - docker logs dockermongodbreplicaset_mongosetup_1 > $CIRCLE_TEST_REPORTS/mongosetup.log
-     - docker logs dockermongodbreplicaset_test_1 > $CIRCLE_TEST_REPORTS/test.log
+     - docker logs dockermongodbreplicaset_mongo1_run_1 > $CIRCLE_TEST_REPORTS/mongo1.log
+     - docker logs dockermongodbreplicaset_mongo2_run_1 > $CIRCLE_TEST_REPORTS/mongo2.log
+     - docker logs dockermongodbreplicaset_mongo3_run_1 > $CIRCLE_TEST_REPORTS/mongo3.log
+     - docker logs dockermongodbreplicaset_mongosetup_run_1 > $CIRCLE_TEST_REPORTS/mongosetup.log
+     - docker logs dockermongodbreplicaset_test_run_1 > $CIRCLE_TEST_REPORTS/test.log
