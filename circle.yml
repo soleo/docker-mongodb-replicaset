@@ -10,12 +10,9 @@ dependencies:
   pre:
     - sudo pip install docker-compose
     - sudo mkdir -p $CIRCLE_TEST_REPORTS/coverage_html/
-    - sudo chmod a+x /usr/bin/docker
     - docker info
     - docker version
     - docker-compose version
-  post:
-    - docker-compose up
 test:
   pre:
     # starting the backend services I want for my test container using docker run, which will not bind published ports by default
@@ -33,8 +30,8 @@ test:
      - docker stop $(docker ps -a -q)
      # get each log separately - docker-compose logs times out, I think it's trying to stream even though the containers are stopped.
      # depends on the standard naming convention of docker-compose
-     - docker logs dockermongodbreplicaset_mongo1_run_1 > $CIRCLE_TEST_REPORTS/mongo1.log
-     - docker logs dockermongodbreplicaset_mongo2_run_1 > $CIRCLE_TEST_REPORTS/mongo2.log
-     - docker logs dockermongodbreplicaset_mongo3_run_1 > $CIRCLE_TEST_REPORTS/mongo3.log
-     - docker logs dockermongodbreplicaset_mongosetup_run_1 > $CIRCLE_TEST_REPORTS/mongosetup.log
-     - docker logs dockermongodbreplicaset_test_run_1 > $CIRCLE_TEST_REPORTS/test.log
+     - docker logs dockermongodbreplicaset_mongo1_1 > $CIRCLE_TEST_REPORTS/mongo1.log
+     - docker logs dockermongodbreplicaset_mongo2_1 > $CIRCLE_TEST_REPORTS/mongo2.log
+     - docker logs dockermongodbreplicaset_mongo3_1 > $CIRCLE_TEST_REPORTS/mongo3.log
+     - docker logs dockermongodbreplicaset_mongosetup_1 > $CIRCLE_TEST_REPORTS/mongosetup.log
+     - docker logs dockermongodbreplicaset_test_1 > $CIRCLE_TEST_REPORTS/test.log
