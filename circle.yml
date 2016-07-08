@@ -9,6 +9,7 @@ dependencies:
     - sudo pip install docker-compose
     - sudo mkdir -p $CIRCLE_TEST_REPORTS/coverage_html/
     - docker info
+    - docker version
     - docker-compose version
   post:
     - docker-compose up
