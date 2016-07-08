@@ -9,7 +9,7 @@ services:
       - "28018:28017"
     restart: always
     volumes:
-      - ./data/rs0-3:/data
+      - ./data/rs0-3:/data/db
   mongo2:
     hostname: mongo2
     image: mongo:2.6
@@ -19,7 +19,7 @@ services:
       - "28019:28017"
     restart: always
     volumes:
-      - ./data/rs0-2:/data
+      - ./data/rs0-2:/data/db
   mongo1:
     hostname: mongo1
     image: mongo:2.6
@@ -32,7 +32,7 @@ services:
       - "mongo3:mongo3"
     restart: always
     volumes:
-      - ./data/rs0-1:/data
+      - ./data/rs0-1:/data/db
   # This configures the MongoDB replicaset
   mongosetup:
     image: mongo:2.6

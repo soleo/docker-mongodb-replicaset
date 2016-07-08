@@ -19,6 +19,10 @@ It's probably not a good idea to run this setup in production as each mongo inst
 $ docker-compose up -d
 ```
 
+```console
+$ docker-compose restart mongosetup
+```
+
 #### Access Shell of Container
 
 * Check Status of mongo containers 
@@ -31,7 +35,20 @@ CONTAINER ID        IMAGE               COMMAND                  CREATED        
 508fa0885710        mongo:2.6           "mongod --replSet rs0"   6 minutes ago       Up 6 minutes        0.0.0.0:27019->27017/tcp, 0.0.0.0:28019->28017/tcp   dockermongodbreplicaset_mongo2_1
 ```
 
-* Access shell of container with `docker exec -it dockermongodbreplicaset_mongo1_1 bash`
+```console
+$ docker-compose ps
+                Name                              Command               State                          Ports
+-----------------------------------------------------------------------------------------------------------------------------------
+dockermongodbreplicaset_mongo1_1       mongod --replSet rs0 --jou ...   Up       0.0.0.0:27017->27017/tcp, 0.0.0.0:28017->28017/tcp
+dockermongodbreplicaset_mongo2_1       mongod --replSet rs0 --jou ...   Up       0.0.0.0:27019->27017/tcp, 0.0.0.0:28019->28017/tcp
+dockermongodbreplicaset_mongo3_1       mongod --replSet rs0 --jou ...   Up       0.0.0.0:27018->27017/tcp, 0.0.0.0:28018->28017/tcp
+dockermongodbreplicaset_mongosetup_1   /scripts/setup.sh                Exit 0
+```
+
+* Access shell of container with 
+   * `docker exec -it dockermongodbreplicaset_mongo1_1 bash`
+   * `docker-compose exec mongo1 bash`
+   
 * Access mongo shell with `mongo`
 
 
