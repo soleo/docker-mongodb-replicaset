@@ -19,7 +19,7 @@ test:
      - docker-compose -f docker-compose.yml -f docker-compose-test.yml run -d mongo3
      - docker-compose -f docker-compose.yml -f docker-compose-test.yml run -d mongo2
      - docker-compose -f docker-compose.yml -f docker-compose-test.yml run -d mongo1
-     - docker-compose -f docker-compose.yml -f docker-compose-test.yml run -d mongosetup
+     - docker-compose -f docker-compose.yml -f docker-compose-test.yml run --no-deps -d mongosetup
   override:
      # docker-compose run was restarting all linked services with their published ports and causing port bind collisions
      # so specifying --no-deps so they don't restart

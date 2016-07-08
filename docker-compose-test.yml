@@ -11,4 +11,4 @@ services:
         - "mongo1:mongo1"
         - "mongo2:mongo2"
         - "mongo3:mongo3"
-    command: nosetests -v --with-xunit --xunit-file=/circle_artifacts/nosetests.xml --with-coverage --cover-html --cover-html-dir=/circle_artifacts/coverage_html/
+    command: sh scripts/ci_test.sh
