@@ -1,6 +1,6 @@
 version: "2"
 services:
-test:
+  test:
     hostname: test
     image: mongo:2.6
     volumes:
