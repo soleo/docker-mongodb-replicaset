@@ -13,4 +13,4 @@ fi
 
 tar -xvzf ${MONGODB}
 # restore from a dump
-mongorestore --oplogReplay --db dev --drop --objcheck --maintainInsertionOrder --batchSize=100 ${MONGODBFILEPATH}
+mongorestore  --db dev --drop --objcheck --maintainInsertionOrder --batchSize=100 ${MONGODBFILEPATH}
