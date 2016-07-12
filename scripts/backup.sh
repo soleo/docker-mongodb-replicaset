@@ -2,6 +2,7 @@
 
 MONGOHOST="172.31.16.76"
 MONGOPORT="27017"
+MONGODB="dev"
 MONGOUSER=""
 MONGOPASSWORD=""
 MONGOBAKPATH="/mongodb"
@@ -15,7 +16,7 @@ W=`date +%V`                                      # Week Number e.g 37
 
 rm -rf $MONGOBAKPATH/dump-*
 
-mongodump --oplog --host $MONGOHOST --out $MONGOBAKPATH/dump-$DATE
+mongodump --host $MONGOHOST --db $MONGODB --out $MONGOBAKPATH/dump-$DATE
 tar -zcvf $MONGOBAKPATH/dump-$DATE.tar.gz  $MONGOBAKPATH/dump-$DATE
 
 s3cmd put $MONGOBAKPATH/dump-$DATE.tar.gz s3://prephero/mongo/$DOW/
