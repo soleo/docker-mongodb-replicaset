@@ -12,10 +12,11 @@ MONGOPASSWORD=""
 DATE=`date +%Y-%m-%d`
 
 SRC_ROOT="$(git rev-parse --show-toplevel)"
-rm -rf $SRC_ROOT/mongodb*
 
-aws s3 cp s3://prephero/mongo/${DOW}/mongodb.${MONGOHOST}.${DATE}.${DOW}.tar.gz $SRC_ROOT
+echo "CLEAN FOLDER"
+rm -rf $SRC_ROOT/mongodb* 
 
-cd $SRC_ROOT && tar -xvzf $SRC_ROOT/mongodb.${MONGOHOST}.${DATE}.${DOW}.tar.gz
-
+echo "RESTORING NOW"
+aws s3 cp s3://prephero/mongo/${DOW}/mongodb.${MONGOHOST}.${DATE}.${DOW}.tar.gz $SRC_ROOT && \
+cd $SRC_ROOT && tar -xvzf $SRC_ROOT/mongodb.${MONGOHOST}.${DATE}.${DOW}.tar.gz && \
 mongorestore --db dev --drop --objcheck $SRC_ROOT/mongodb/Backup/mongodb/mongodb.${MONGOHOST}.${DATE}.${DOW}/prephero
